@@ -5,10 +5,32 @@ import AddItem from "./AddItem";
 
 function SlotList() {
 
+    
     const [slots, setSlots] = useState([]);
     const [slotId, setSlotId] = useState(null);
     const [showModal, setShowModal] = useState(false);
     
+    // Create 20 slots
+    const createSlot = async () => {
+        try {
+          const response = await fetch("http://localhost:8080/api/slots/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          });
+    
+          const data = await response.text();
+          alert(data);
+          window.location.reload();
+
+        } catch (error) {
+
+          alert("Cannot create slot");
+        }
+    };
+
     // Retrieve all the slots list
     useEffect(() => {
         let url = 'http://localhost:8080/api/slots/list';
@@ -21,6 +43,11 @@ function SlotList() {
         })
         .catch(err => console.log(err));
     }, []);
+
+    
+    const handleClick = () => {
+        createSlot();
+    };
 
     const handleAddItem = (id) => {
         setSlotId(id);
@@ -35,7 +62,7 @@ function SlotList() {
         <>
         <Menu />
         <Container className="p-2">
-            <h4 className="mb-4">Slot List</h4>
+            <Button className="secondary mb-2" onClick={handleClick}>Create Slot</Button>
             <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
             {slots.map((slot) => (
                 <Col key={slot.slotId} className="mb-4">
@@ -48,7 +75,7 @@ function SlotList() {
                     </Card.Body>
                     <Card.Footer>
                     <div className="d-grid gap-2">
-                    <Button variant="primary" onClick={() => handleAddItem(slot.slotId)}>Add Item</Button>
+                    <Button variant="primary" onClick={() => handleAddItem(slot.slotId)}>Add Item in Slot</Button>
                     </div>
                     </Card.Footer>
                 </Card>
@@ -63,9 +90,6 @@ function SlotList() {
             <Modal.Body>
                 <AddItem slotId={slotId} />
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
-            </Modal.Footer>
         </Modal>
         </>
     );

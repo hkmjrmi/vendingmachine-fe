@@ -1,16 +1,32 @@
-import { Link } from "react-router-dom";
+import { Nav, Navbar } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 
 function Menu() {
+
+    const [loggedIn, setLoggedIn] = useState(true);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        setLoggedIn(false);
+        navigate('/login');
+    }
+
+
    
     return (
-        <div className="navbar">
-            <h1>VendingMachine</h1>
-            <div className="links">
-                <Link to="/transactionlist">Transaction List</Link>
-                <Link to="/slotlist">Slot List</Link>
-                <Link to="/itemlist">Item List</Link>
-            </div>
-        </div>
+        <Navbar>
+            <Navbar.Brand className='p-1'>Vending Machine</Navbar.Brand>
+            <Nav>
+                <Link className="mx-2 text-decoration-none" to="/transactionlist">Transaction List</Link>
+                <Link className="mx-2 text-decoration-none" to="/slotlist">Slot List</Link>
+                <Link className="mx-2 text-decoration-none" to="/itemlist">Item List</Link>
+            </Nav>
+            <Nav className='ms-auto'>
+            {loggedIn && <Nav.Link onClick={handleLogout}>Logout</Nav.Link>}
+            </Nav>
+        </Navbar>
     );
 }
 

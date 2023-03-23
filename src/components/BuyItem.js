@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { Row, Card, Col, Button } from "react-bootstrap";
-import Menu from "./Menu";
-
-function ItemList() {
+import { Card,Row,Col,Button } from "react-bootstrap";
+function BuyItem(props) {
 
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        let url = 'http://localhost:8080/api/items/available/list';
-        let param = { method: 'GET'};
+        let url = "http://localhost:8080/api/slots/" +props.slotId+ "/items";
+        let param = { method: "GET" };
         fetch(url, param)
-            .then(data => data.json())
-            .then(json => {
-                console.log(json);
-                setItems(json);
-            })
-            .catch(err => console.log(err));
+          .then((data) => data.json())
+          .then((json) => {
+            console.log(json);
+            setItems(json);
+          })
+          .catch((err) => console.log(err));
     }, []);
 
     function addTransaction(itemId, transactionRequest) {
@@ -28,7 +26,7 @@ function ItemList() {
         fetch(url, options)
           .then(response => response.json())
           .then(() => {
-            alert('Transaction added successfully');
+            alert('transaction added successfully');
             window.location.reload(); // To automatically reload the page after success onClick event
           })
           .catch(error => console.error(error));
@@ -39,21 +37,16 @@ function ItemList() {
         addTransaction(itemId, transactionRequest);
     }
 
-
     return ( 
-        <><Menu /><div className="container p-2">
-            <Row xs={1} md={2} lg={4}>
+        <div>
+            <Row>
                 {items.map(item => (
                     <Col key={item.id} className="mb-4">
                         <Card>
+                            <Card.Header>ID #{item.itemId}</Card.Header>
                             <Card.Body>
-                                <Card.Title>{item.name}</Card.Title>
-                                <Card.Text>
-                                    Price: RM{item.price.toFixed(2)}
-                                </Card.Text>
-                                <Card.Text>
-                                    Slot {item.slot.slotId}
-                                </Card.Text>
+                                <h5>{item.name}</h5>
+                                <sub>{item.category}</sub>
                             </Card.Body>
                             <Card.Footer>
                             <div className="d-grid gap-2">
@@ -64,8 +57,8 @@ function ItemList() {
                     </Col>
                 ))}
             </Row>
-        </div></>
+        </div>
      );
 }
 
-export default ItemList;
+export default BuyItem;

@@ -30,51 +30,47 @@ function AddItem(props) {
     
     return ( 
         <div>
-              <Card className="my-5">
-                <Card.Body className="p-5">
-                  <Form onSubmit={handleSubmit}>
-                  <Form.Group controlId="name">
-                    <Form.Label>Item Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter product name" 
-                    value={item.name} onChange={(e) =>setItem({ ...item, name: e.target.value })} required />
-                  </Form.Group>
-                  <Form.Group controlId="category">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Category"
-                      value={item.category}
-                      onChange={(e) =>
-                        setItem({ ...item, category: e.target.value })
-                      }
-                    required />
-                  </Form.Group>
-                  <Form.Group controlId="price">
-                    <Form.Label>Price</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter price"
-                      value={item.price}
-                      onChange={(e) =>
-                        setItem({ ...item, price: e.target.value })
-                      }
-                    required />
-                  </Form.Group>
-                  <Form.Group controlId="size">
-                    <Form.Label>Size</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter size"
-                      value={item.size}
-                      onChange={(e) =>
-                        setItem({ ...item, size: e.target.value })
-                      }
-                    required />
-                  </Form.Group>
-                  <Button variant="primary" type="submit">Submit</Button>
-                </Form>
-                </Card.Body>
-              </Card>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="name">
+                <Form.Label>Item Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter product name" 
+                value={item.name} onChange={(e) =>setItem({ ...item, name: e.target.value })} required />
+              </Form.Group>
+              <Form.Group controlId="category">
+                <Form.Label>Category</Form.Label>
+                <Form.Control as="select"
+                 value={item.category} onChange={(e) => setItem({ ...item, category: e.target.value })} required>
+                <option value="Cookies">Cookies</option>
+                <option value="Chips">Chips</option>
+              </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="price">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter price"
+                  value={item.price}
+                  onChange={(e) =>
+                    setItem({ ...item, price: e.target.value })
+                  }
+                required />
+              </Form.Group>
+              <Form.Group controlId="size">
+                <Form.Label>Size</Form.Label>
+                <Form.Control as="select"
+                  value={item.size}
+                  onChange={(e) =>
+                    setItem({ ...item, size: e.target.value })
+                  }
+                required>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                </Form.Control>
+              </Form.Group>
+              <div className="text-end mt-2">
+              <Button variant="primary"type="submit">Add Item</Button>
+              </div>
+          </Form>     
         </div>
      );
 }
