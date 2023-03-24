@@ -16,18 +16,22 @@ function Menu() {
 
    
     return (
-        <Navbar>
-            <Navbar.Brand className='p-1'>Vending Machine</Navbar.Brand>
-            <Nav>
-                <Link className="mx-2 text-decoration-none" to="/transactionlist">Transaction List</Link>
-                <Link className="mx-2 text-decoration-none" to="/slotlist">Slot List</Link>
-                <Link className="mx-2 text-decoration-none" to="/itemlist">Item List</Link>
+        <div className='bg-danger'>
+          <Navbar>
+            <Nav className='me-auto'>
+              <Link className="mx-2 text-light text-decoration-none" to="/transactionlist">Transaction List</Link>
+              <Link className="mx-2 text-light text-decoration-none" to="/slotlist">Slot List</Link>
+              <Link className="mx-2 text-light text-decoration-none" to="/itemlist">Item List</Link>
+              <Link className="mx-2 text-light text-decoration-none" to="/">Buy Screen</Link>
             </Nav>
             <Nav className='ms-auto'>
-            {loggedIn && <Nav.Link onClick={handleLogout}>Logout</Nav.Link>}
+              {loggedIn && <Nav.Link onClick={handleLogout} className='mx-2 text-light'>Logout</Nav.Link>}
             </Nav>
-        </Navbar>
+          </Navbar>
+        </div>
     );
+      
+      
 }
 
 export default Menu;

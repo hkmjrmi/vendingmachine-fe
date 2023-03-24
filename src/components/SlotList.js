@@ -62,7 +62,7 @@ function SlotList() {
         <>
         <Menu />
         <Container className="p-2">
-            <Button className="secondary mb-2" onClick={handleClick}>Create Slot</Button>
+            <Button variant="danger" className="mb-2" onClick={handleClick}>Create Slot</Button>
             <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
             {slots.map((slot) => (
                 <Col key={slot.slotId} className="mb-4">
@@ -75,7 +75,7 @@ function SlotList() {
                     </Card.Body>
                     <Card.Footer>
                     <div className="d-grid gap-2">
-                    <Button variant="primary" onClick={() => handleAddItem(slot.slotId)}>Add Item in Slot</Button>
+                    <Button variant="danger" onClick={() => handleAddItem(slot.slotId)}>Add Item in Slot</Button>
                     </div>
                     </Card.Footer>
                 </Card>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Row, Card, Col, Button } from "react-bootstrap";
+import { Table, Card } from "react-bootstrap";
 import Menu from "./Menu";
 
 function ItemList() {
@@ -7,7 +7,7 @@ function ItemList() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        let url = 'http://localhost:8080/api/items/available/list';
+        let url = 'http://localhost:8080/api/items/list';
         let param = { method: 'GET'};
         fetch(url, param)
             .then(data => data.json())
@@ -18,52 +18,36 @@ function ItemList() {
             .catch(err => console.log(err));
     }, []);
 
-    function addTransaction(itemId, transactionRequest) {
-        const url = `http://localhost:8080/api/items/${itemId}/transactions/add`;
-        const options = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(transactionRequest)
-        };
-        fetch(url, options)
-          .then(response => response.json())
-          .then(() => {
-            alert('Transaction added successfully');
-            window.location.reload(); // To automatically reload the page after success onClick event
-          })
-          .catch(error => console.error(error));
-    }
-
-    function handleBuyClick(itemId) {
-        const transactionRequest = {};
-        addTransaction(itemId, transactionRequest);
-    }
-
 
     return ( 
         <><Menu /><div className="container p-2">
-            <Row xs={1} md={2} lg={4}>
-                {items.map(item => (
-                    <Col key={item.id} className="mb-4">
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>{item.name}</Card.Title>
-                                <Card.Text>
-                                    Price: RM{item.price.toFixed(2)}
-                                </Card.Text>
-                                <Card.Text>
-                                    Slot {item.slot.slotId}
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                            <div className="d-grid gap-2">
-                                <Button variant="primary"  onClick={() => handleBuyClick(item.itemId)}>Buy</Button>
-                            </div>
-                            </Card.Footer>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+            <Card>
+            <Card.Header>Item List</Card.Header>
+                <Card.Body>
+                <Table responsive className="text-center">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Slot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map(item => (
+                                <tr key={item.itemId}>
+                                    <td>{item.itemId}</td>
+                                    <td>{item.name}</td>
+                                    <td>RM{item.price.toFixed(2)}</td>
+                                    <td>{item.status}</td>
+                                    <td>{item.slot.slotId}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Card.Body>
+            </Card>
         </div></>
      );
 }

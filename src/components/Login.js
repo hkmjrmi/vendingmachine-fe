@@ -26,11 +26,12 @@ function Login({ onLogin }) {
   return ( 
     <div id="login" style={{ minHeight: "100vh",display: "flex",justifyContent: "center", alignItems: "center", }}>
       <Container>
+        <h1 className="text-center"> Vending Machine</h1>
         <div className="d-flex align-items-center justify-content-center mb-4">
-          <h1 className="text">Vending Machine</h1>
+        <img src="https://cdn-icons-png.flaticon.com/512/1361/1361248.png" style={{width:"50px", height:"50px"}}></img>
         </div>
         <Col xs={12} md={{ span: 6, offset: 3 }}>
-          <Card>
+          <Card className="text-center">
             <Card.Header>Login</Card.Header>
             <Card.Body className="text-center">
               { msg && <Alert variant="danger">{ msg }</Alert>}
@@ -43,7 +44,7 @@ function Login({ onLogin }) {
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" placeholder="Enter Password" ref={password}/>
                 </Form.Group>
-                <Button variant="primary" className="btn btn-block" type="submit">Login</Button>
+                <Button variant="danger" className="btn btn-block" type="submit">Login</Button>
               </Form>
             </Card.Body>
             <Button variant="secondary" className="btn btn-block"> <Link className="text-light text-decoration-none" to={"/"}>

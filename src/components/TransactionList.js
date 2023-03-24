@@ -23,7 +23,7 @@ function TransactionList() {
             <Card>
                 <Card.Header>Transaction List</Card.Header>
                 <Card.Body>
-                    <Table>
+                    <Table responsive>
                         <thead>
                             <tr>
                                 <td>ID</td>

@@ -50,7 +50,7 @@ function BuyItem(props) {
                             </Card.Body>
                             <Card.Footer>
                             <div className="d-grid gap-2">
-                                <Button variant="primary"  onClick={() => handleBuyClick(item.itemId)}>Buy</Button>
+                                <Button variant="danger"  onClick={() => handleBuyClick(item.itemId)}>Buy</Button>
                             </div>
                             </Card.Footer>
                         </Card>

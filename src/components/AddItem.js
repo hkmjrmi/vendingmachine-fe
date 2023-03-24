@@ -68,7 +68,7 @@ function AddItem(props) {
                 </Form.Control>
               </Form.Group>
               <div className="text-end mt-2">
-              <Button variant="primary"type="submit">Add Item</Button>
+              <Button variant="danger"type="submit">Add Item</Button>
               </div>
           </Form>     
         </div>
